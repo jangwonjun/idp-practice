@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS 기초 정리</title>
+</head>
+<body>
+  <h1 id="change">Hello World</h1>
+  <h2 class="change">Class 선택자 예시</h2>
+  <img id="pic" src="hci.png" width="150">
+
+  <div id="box" style="width:100px; height:100px; background-color:lightgray; margin-top:20px;">
+    Box 영역
+  </div>
+
+  <script>
+    /**********************
+     1. 함수(Function)
+    **********************/
+
+    // 기본 함수
+    function addNumbers() {
+      const num1 = 5, num2 = 10, num3 = 15;
+      const sum = num1 + num2 + num3;
+      alert("결과값 : " + sum);
+    }
+    // addNumbers();
+
+    // 매개변수 사용
+    function addNumbers2(num1, num2, num3) {
+      const sum = num1 + num2 + num3;
+      alert("결과값 : " + sum);
+    }
+    // addNumbers2(20, 30, 40);
+
+    // 익명 함수 (즉시 실행)
+    (function(a, b) {
+      const sum = a + b;
+      console.log("익명함수 결과:", sum);
+    })(100, 200);
+
+
+    /**********************
+     2. 화살표 함수 (ES6)
+    **********************/
+    const hi1 = () => alert("안녕하세요!");
+    const hi2 = user => document.write(user + "님 안녕하세요!<br>");
+    const add = (a, b) => a + b;
+    // hi1();
+    // hi2("홍길동");
+    // console.log(add(3, 4));
+
+
+    /**********************
+     3. 이벤트 & 이벤트 처리기
+    **********************/
+
+    // onclick 직접 등록
+    const changeBtn = document.querySelector("#change");
+    changeBtn.onclick = () => {
+      changeBtn.style.color = "red";
+    };
+
+    // 이벤트 객체 활용
+    document.querySelector("#pic").onclick = (event) => {
+      alert(`이벤트 유형: ${event.type}, 좌표: ${event.pageX}, ${event.pageY}`);
+    };
+
+    // addEventListener 등록
+    const kd = document.querySelector("#pic");
+    kd.addEventListener("mouseover", () => kd.src = "hci.png");
+    kd.addEventListener("mouseout", () => kd.src = "hci.png");
+
+
+    /**********************
+     4. 자바스크립트 객체
+    **********************/
+
+    // Date 객체
+    const now = new Date();
+    console.log("오늘 날짜:", now.toLocaleDateString());
+
+    // Array 객체
+    const a = [1, 2, 3, 4];
+    a.push(5);     // 끝에 추가
+    a.unshift(0);  // 앞에 추가
+    a.pop();       // 끝 제거
+    a.shift();     // 앞 제거
+    console.log("배열 a:", a);
+
+
+    /**********************
+     5. 브라우저 객체
+    **********************/
+    console.log("현재 주소:", location.href);
+    console.log("스크린 크기:", screen.width, screen.height);
+
+
+    /**********************
+     6. DOM 조작
+    **********************/
+
+    // querySelector / querySelectorAll
+    document.querySelector(".change").onclick = () => {
+      document.querySelector("#change").style.color = "blue";
+    };
+
+    // 속성 접근
+    const img = document.querySelector("#pic");
+    console.log("이미지 src:", img.getAttribute("src"));
+    img.setAttribute("alt", "샘플 이미지");
+
+    // 텍스트/HTML
+    const box = document.querySelector("#box");
+    box.innerText = "텍스트 변경됨!";
+    // box.innerHTML = "<b>굵은 글씨!</b>";
+
+    // 스타일 변경
+    box.style.backgroundColor = "red";
+
+    // 노드 조작
+    const newEl = document.createElement("p");
+    newEl.innerText = "새로운 문단입니다!";
+    document.body.appendChild(newEl);
+    // document.body.removeChild(newEl);
+  </script>
+</body>
+</html>
