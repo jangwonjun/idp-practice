@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>오늘 배운 JS 정리</title>
+</head>
+<body>
+  <h1>오늘 배운 JS 정리 (실행 예제)</h1>
+  <p>👉 개발자도구 Console(F12)에서 실행 결과를 확인하세요.</p>
+
+  <script>
+    // 1. 배열(Array) 기본
+    console.log("=== 배열 기본 ===");
+    console.log(Object.getOwnPropertyDescriptors([1,2,3]));
+
+    // 2. 배열 메서드
+    console.log("=== 배열 메서드 ===");
+    const arr = [1,2,3];
+    const a = arr.pop();
+    console.log(a); // 3
+    console.log(arr); // [1,2]
+    arr.push(4);
+    arr.shift();
+    arr.unshift(0);
+    console.log(arr);
+
+    // 3. 고차함수 & 클로저
+    console.log("=== 고차함수 & 클로저 ===");
+    function makeCounter(predicate) {
+      let num = 0;
+      return function() {
+        num = predicate(num);
+        return num;
+      };
+    }
+    function increase(n) { return ++n; }
+    const increaser = makeCounter(increase);
+    console.log(increaser()); // 1
+    console.log(increaser()); // 2
+
+    // 4. 배열 고차함수
+    console.log("=== map ===");
+    const numbers = [1,4,9];
+    console.log(numbers.map(i => i + 1)); // [2,5,10]
+
+    console.log("=== sort ===");
+    const points = [1, 10, 21, 2];
+    console.log(points.sort((a,b)=> a - b));
+    console.log(points.sort((a,b)=> b - a));
+    let array = [{name: 'Lee', age: 20}, {name: 'Kim', age: 30}, {name: 'Park', age: 10}];
+    console.log(array.sort((a,b)=> a.age - b.age));
+
+    console.log("=== filter & find ===");
+    let users = [{name: 'Lee', age: 20}, {name: 'Kim', age: 2}, {name: 'Park', age: 10}];
+    console.log(users.filter(u => u.age < 3));
+    console.log(users.find(u => u.age < 3));
+
+    console.log("=== forEach ===");
+    const number = [1,2,3];
+    let total = 0;
+    number.forEach(i => total += i);
+    console.log(total); // 6
+
+    console.log("=== reduce ===");
+    const arr2 = [1,2,3];
+    console.log(arr2.reduce((prev, curr) => prev + curr)); // 6
+
+    // 5. Map
+    console.log("=== Map ===");
+    let map = new Map();
+    let obj = {name: 'Lee'};
+    map.set(obj, 'developer');
+    map.set(1, 'number');
+    map.set('1', 'string');
+    map.forEach((value, key) => console.log(key, value));
+
+    // 6. Set
+    console.log("=== Set ===");
+    let set = new Set(["oranges", "apples", "bananas", "oranges"]);
+    set.forEach(value => console.log(value));
+  </script>
+</body>
+</html>
